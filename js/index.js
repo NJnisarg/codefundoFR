@@ -6,12 +6,18 @@ const headers = {"Content-Type":"application/json", "Authorization": token_requi
 // Helper functions
 function check_login()
 {
-    if(localStorage.getItem("isLoggedIn")!==true)
+    if(localStorage.getItem("isLoggedIn")!=="true") {
+        safeRemoval();
         return false;
-    if(localStorage.getItem("userId") === null || localStorage.getItem("userId") === undefined)
+    }
+    if(localStorage.getItem("userId") === null || localStorage.getItem("userId") === undefined) {
+        safeRemoval();
         return false;
-    if(localStorage.getItem("token") === null || localStorage.getItem("token") === undefined)
+    }
+    if(localStorage.getItem("token") === null || localStorage.getItem("token") === undefined) {
+        safeRemoval();
         return false;
+    }
 
     return true;
 }
@@ -38,6 +44,25 @@ function generateInActiveRooms(inActiveRooms)
             "            </div>");
         $("#inactive-rooms").append(roomElement);
     });
+}
+
+function safeRemoval()
+{
+    var i = localStorage.length, key;
+    while (i--)
+    {
+        key = localStorage.key(i);
+        if(key!=="roomId")
+            localStorage.removeItem(key);
+    }
+
+    var j = sessionStorage.length, key2;
+    while(j--)
+    {
+        key2 = sessionStorage.key(j);
+        if(key!=="roomId")
+            localStorage.removeItem(key);
+    }
 }
 
 // On Load handlers

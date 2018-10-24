@@ -72,14 +72,16 @@ function safeRemoval()
     while (i--)
     {
         key = localStorage.key(i);
-        localStorage.removeItem(key);
+        if(key!=="roomId")
+            localStorage.removeItem(key);
     }
 
     var j = sessionStorage.length, key2;
     while(j--)
     {
         key2 = sessionStorage.key(j);
-        sessionStorage.removeItem(key);
+        if(key!=="roomId")
+            localStorage.removeItem(key);
     }
 }
 
