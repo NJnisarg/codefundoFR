@@ -1,0 +1,10 @@
+*{
+    font-family: 'ABeeZee', sans-serif;
+}
+.event-room-card{
+    padding: 20px;
+    background-color: #ECEFF1;
+    margin-bottom: 30px;
+    height: 200px;
+    border-radius: 7px;
+}
