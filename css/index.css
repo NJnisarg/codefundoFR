@@ -1,0 +1,19 @@
+*{
+    font-family: 'ABeeZee', sans-serif;
+}
+.event-room-card{
+    padding: 20px;
+    background-color: #ECEFF1;
+    margin-bottom: 30px;
+    height: 200px;
+    border-radius: 7px;
+}
+
+.nav-bar{
+    padding: 5px;
+}
+
+.jumbo-tron{
+    background-color: #F57C00;
+    margin-top: -20px;
+}
