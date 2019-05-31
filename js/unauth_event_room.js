@@ -82,8 +82,10 @@ $(document).ready(function(){
     // Handling the incoming messages
     socket.on('ping_msg', function(data)
     {
-        var msgElement = $("<p><span style=\"margin:10px; font-weight: bold;\">@" + data.handle + ":</span><span>" + data.msg + "</span></p>");
-        $("#ping-room").append(msgElement);
+        if(data.roomId === localStorage.getItem("roomId")){
+            var msgElement = $("<p><span style=\"margin:10px; font-weight: bold;\">@" + data.handle + ":</span><span>" + data.msg + "</span></p>");
+            $("#ping-room").append(msgElement);
+        }
 
     });
 });

@@ -1,6 +1,7 @@
 // Constants
 var token_required = true;
 const baseUrl = "http://localhost:8000";
+var socket = io(baseUrl);
 const headers = {"Content-Type":"application/json", "Authorization": token_required ? localStorage.getItem("token") : undefined };
 
 // Helper functions
@@ -68,7 +69,6 @@ $(document).ready(function () {
         window.location.replace("index.html");
     }
 
-
     // Load Event Rooms
     var rooms = [];
     token_required = true;
@@ -122,5 +122,37 @@ function loadEventRoom(id)
 // Handling event for create-room
 function createRoom()
 {
+    var title = $("#rm_title").val();
+    var description = $("#rm_des").val();
+    var country = $("#rm_country").val();
+    var state = $("#rm_state").val();
+    var city = $("#rm_city").val();
+
+    var input_providers = $("#rm_providers").val();
+    var providers = [];
+    if(input_providers!=="")
+        providers = input_providers.split(',');
+    else
+        providers = [];
+    providers.push(localStorage.getItem("userId"));
+
+    var data = {title:title, description:description,country:country,city:city,state:state,serviceProviders:providers};
+    data = JSON.stringify(data);
+
+    console.log(data);
+    token_required = false;
+
+    $.ajax({
+        url:baseUrl+'/eventRoom/createRoom',
+        type:"POST",
+        headers:headers,
+        data:data
+    }).done(function(response){
+        console.log(response);
+        generateActiveRooms(response.data)
+    }).fail(function(error){
+        alert('Could Not create the room. Please try again')
+    });
+
 
 }
